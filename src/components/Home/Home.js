@@ -33,6 +33,25 @@ class Home extends Component {
         this.fetchItems(endPoint);
     }
 
+    searchIterms = (searchTerm) => {
+        console.log(searchTerm);
+        let endPoint = ''
+        this.setState({
+            movies: [],
+            loading: true,
+            searchTerm: ''
+        })
+
+        if (searchTerm === '') {
+            endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+        } else {
+            endPoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`
+        }
+        console.log(endPoint);
+
+        this.fetchItems(endPoint)
+    }
+
     loadMoreItems = () => {
         let endPoint = '';
         this.setState({
@@ -54,19 +73,32 @@ class Home extends Component {
                 console.log(result);
                 this.setState({
                     movies: [...this.state.movies, ...result.results],
-                    heroImage: this.state.heroImage || result.results[0],
+                    heroImage: this.state.heroImage || result.results[0], // Khi test, suy nghĩ them 
                     loading: false,
                     currentPage: result.page,
                     totalPages: result.total_pages
                 })
             })
+            .catch(error => console.error('Error', error))
     }
 
     render() {
+        console.log(this.state);
         return (
             <div className="rmdb-home">
-                <HeroImage/>
-                <SearchBar/>
+                { this.state.heroImage  
+                   ? <div>
+                        <HeroImage 
+                            image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${this.state.heroImage.backdrop_path}`}
+                            title={this.state.heroImage.original_title}
+                            text={this.state.heroImage.overview}
+                        />
+                        <SearchBar
+                            callback={this.searchIterms}
+                        />
+                     </div>
+                    : null
+                }
                 <FourColGrid/>
                 <Spinner/>
                 <LoadMoreBtn/>
