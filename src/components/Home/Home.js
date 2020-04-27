@@ -28,7 +28,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=2`;
         // console.log(endPoint);
         this.fetchItems(endPoint);
     }
@@ -47,8 +47,7 @@ class Home extends Component {
         } else {
             endPoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`
         }
-        // console.log(endPoint);
-
+        console.log(endPoint);
         this.fetchItems(endPoint)
     }
 
@@ -102,7 +101,7 @@ class Home extends Component {
                 <div className="rmdb-home-grid">
                     <FourColGrid
                         header={this.state.searchTerm ? 'Search Result' : 'Popular Movies'}
-                        loading={this.state.loading}
+                        // loading={this.state.loading}
                     >
                         {this.state.movies.map((element, i) => {
                             // console.log({element, i});

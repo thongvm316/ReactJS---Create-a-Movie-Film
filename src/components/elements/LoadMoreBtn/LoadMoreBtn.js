@@ -2,7 +2,7 @@ import React from 'react';
 import './LoadMoreBtn.css'
 
 const LoadMoreBtn = (props) => {
-    console.log(props);
+    // console.log(props);
     return (
         <div className="rmdb-loadmorebtn" onClick={props.onClick}>
            <p>{props.text}</p>
