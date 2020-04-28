@@ -4,7 +4,7 @@ import './Navigation.css';
 
 const Navigation = (props) => {
     return (
-        Navigation
+        <div>Navigation</div>
     )
 };
 
