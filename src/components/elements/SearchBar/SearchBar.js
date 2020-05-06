@@ -16,7 +16,7 @@ class SearchBar extends Component {
         this.setState({
             value: e.target.value
         })
-        clearTimeout(this.timeout) ///???????
+        clearTimeout(this.timeout) /// Có nó, khi gõ search, gõ xong đợi 500ms rồi chạy hàm, nếu ko có, trong lúc gõ search chưa gõ xong, đủ time 500ms nó chạy luôn
         this.timeout = setTimeout(() => {
             this.props.callback(this.state.value)
         }, 500)

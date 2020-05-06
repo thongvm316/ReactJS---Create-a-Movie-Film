@@ -28,7 +28,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=2`;
+        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
         // console.log(endPoint);
         this.fetchItems(endPoint);
     }
@@ -47,7 +47,7 @@ class Home extends Component {
         } else {
             endPoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`
         }
-        console.log(endPoint);
+        // console.log(endPoint);
         this.fetchItems(endPoint)
     }
 
@@ -69,10 +69,10 @@ class Home extends Component {
         fetch(endPoint)
             .then(response => response.json())
             .then(result => {
-                // console.log(result);
+                console.log(result);
                 this.setState({
                     movies: [...this.state.movies, ...result.results],
-                    heroImage: this.state.heroImage || result.results[0], // Khi test, suy nghĩ them 
+                    heroImage: this.state.heroImage || result.results[7], // Khi test, suy nghĩ them 
                     loading: false,
                     currentPage: result.page,
                     totalPages: result.total_pages
@@ -82,11 +82,11 @@ class Home extends Component {
     }
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);
         return (
             <div className="rmdb-home">
                 { this.state.heroImage  
-                   ? <div>
+                    ? <div>
                         <HeroImage 
                             image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${this.state.heroImage.backdrop_path}`}
                             title={this.state.heroImage.original_title}
@@ -95,13 +95,13 @@ class Home extends Component {
                         <SearchBar
                             callback={this.searchIterms}
                         />
-                     </div>
+                      </div>
                     : null
                 }
                 <div className="rmdb-home-grid">
                     <FourColGrid
                         header={this.state.searchTerm ? 'Search Result' : 'Popular Movies'}
-                        // loading={this.state.loading}
+                        loading={this.state.loading}
                     >
                         {this.state.movies.map((element, i) => {
                             // console.log({element, i});
@@ -116,7 +116,8 @@ class Home extends Component {
                     </FourColGrid>
                     {this.state.loading ? <Spinner/> : null}
                     {
-                        (this.state.currentPage <= this.state.totalPages && !this.state.loading)
+                        // (this.state.currentPage <= this.state.totalPages && !this.state.loading) // chưa hiểu Why use thêm: && !this.state.loading
+                        (this.state.currentPage <= this.state.totalPages) // dùng cách này cũng đc mà
                         ? <LoadMoreBtn text="Load More" onClick={this.loadMoreItems}/>
                         : null
                     }   
