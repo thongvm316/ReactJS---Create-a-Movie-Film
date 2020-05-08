@@ -5,6 +5,7 @@ import MovieThumb from '../MovieThumb/MovieThumb';
 import './MovieInfo.css';
 
 const MovieInfo = (props) => {
+    console.log(props);
     return (
         <div className="rmdb-movieinfo"
             style={{
@@ -22,6 +23,7 @@ const MovieInfo = (props) => {
                         }
                         clickable={false}
                     />
+                </div>
                     <div className="rmdb-movieinfo-text">
                         <h1>{props.movie.title}</h1>
                         <h3>PLOT</h3>
@@ -30,13 +32,13 @@ const MovieInfo = (props) => {
                         <div className="rmdb-rating">
                             <meter min="0" max="100" optimun="100" low="40" high="70" value={props.movie.vote_average * 10}></meter> {/* What is meter? */}
                             <p className="rmdb-score">{props.movie.vote_average}</p>
-                        </div>
+                        </div> 
                         {props.directors.length > 1 ? <h3>DIRECTORS</h3> : <h3>DIRECTOR</h3>}
                         {props.directors.map((element, i) => {
                             return <p key={i} className="rmdb-director">{element.name}</p>
                         })}
                     </div>
-                </div>
+                
                 <FontAwesome className="fa-film" name="film" size="5x"/>
             </div>
         </div>

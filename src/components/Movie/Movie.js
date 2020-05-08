@@ -35,16 +35,16 @@ class Movie extends Component {
             if (result.status_code) {
                 this.setState({ loading: false })
             } else {
-                this.setState({movie: result }, () => {
+                this.setState({movie: result}, () => {
                     // ... then fetch actors in the setState callback function
                     const endPoint = `${API_URL}movie/${this.props.match.params.movieId}/credits?api_key=${API_KEY}`;  
-                    // console.log(endPoint); 
+                    console.log(endPoint); 
                     fetch(endPoint)
                         .then(result => result.json())
                         .then(result => {
                             console.log(result);
                             const directors = result.crew.filter(member => member.job === "Director");
-                            // console.log(directors);
+                            console.log(directors);
                             this.setState({
                                 actors: result.cast,
                                 director: directors,
@@ -64,7 +64,7 @@ class Movie extends Component {
                 {this.state.movie 
                 ? <div>
                     <Navigation movie={this.props.location.movieName}/>
-                    <MovieInfo movie={this.state.movie} directors={this.state.directors}/>
+                    <MovieInfo movie={this.state.movie} directors={this.state.director}/>
                     <MovieInfoBar 
                         time={this.state.movie.runtime} 
                         budget={this.state.movie.budget}

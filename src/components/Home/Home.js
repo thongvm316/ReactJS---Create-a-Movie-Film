@@ -28,7 +28,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=2`;
         // console.log(endPoint);
         this.fetchItems(endPoint);
     }

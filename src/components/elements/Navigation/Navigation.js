@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = (props) => {
-    console.log(props);
+    // console.log(props);
     return (
         <div className="rmdb-navigation">
             <div className="rmdb-navigation-content">
