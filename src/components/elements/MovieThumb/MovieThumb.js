@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MovieThumb.css'
 
-const MovieThumb = (props) => {
+const MovieThumb = ({movieId, movieName, image, clickable}) => {
     // console.log(props);
     return (
         <div className="rmdb-moviethumb">
-            {props.clickable ? // ???? dùng để click --> show more info which film did you clicked
-                <Link to={{ pathname: `/${props.movieId}`, movieName: `${props.movieName}` }}> {/* movieName: `${props.movieName} ??? chưa hiểu dụng ý  */}
-                    <img src={props.image} alt="moviethumb"/>
+            {clickable ? // ???? dùng để click --> show more info which film did you clicked
+                <Link to={{ pathname: `/${movieId}`, moviename: `${movieName}` }}> {/* movieName: `${props.movieName} --> đẩy dữ liệu qua component Movie  */}
+                    <img src={image} alt="moviethumb"/>
                 </Link>
-                : <img src={props.image} alt="moviethumb"/>
+                : <img src={image} alt="moviethumb"/>
             }  
         </div>
     )

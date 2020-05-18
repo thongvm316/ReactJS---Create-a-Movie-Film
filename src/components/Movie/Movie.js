@@ -31,26 +31,23 @@ class Movie extends Component {
         fetch(endPoint)
         .then(result => result.json())
         .then(result => {
-            console.log(result);
             if (result.status_code) {
                 this.setState({ loading: false })
             } else {
                 this.setState({movie: result}, () => {
-                    // ... then fetch actors in the setState callback function
                     const endPoint = `${API_URL}movie/${this.props.match.params.movieId}/credits?api_key=${API_KEY}`;  
-                    console.log(endPoint); 
                     fetch(endPoint)
                         .then(result => result.json())
                         .then(result => {
-                            console.log(result);
+                            console.log(result)
                             const directors = result.crew.filter(member => member.job === "Director");
-                            console.log(directors);
                             this.setState({
                                 actors: result.cast,
                                 director: directors,
                                 loading: false
                             })
                         })
+                        .catch( err => console.error('Error:', err))
                 })
             }
         })
@@ -59,18 +56,19 @@ class Movie extends Component {
 
     render() {
         console.log(this.state);
+        // console.log(this.props);
         return (
             <div className="rmdb-movie">
                 {this.state.movie 
                 ? <div>
-                    <Navigation movie={this.props.location.movieName}/>
+                    <Navigation movie={this.props.location.moviename}/>
                     <MovieInfo movie={this.state.movie} directors={this.state.director}/>
                     <MovieInfoBar 
-                        time={this.state.movie.runtime} 
+                        time={this.state.movie.runtime}
                         budget={this.state.movie.budget}
                         revenue={this.state.movie.revenue}    
                     />
-                    </div>
+                  </div>
                 : null }
                 
                 {this.state.actors 
@@ -80,9 +78,9 @@ class Movie extends Component {
                             return <Actor key={i} actor={element}/>
                         })}
                     </FourColGrid>
-                    </div>
+                  </div>
                 : null }
-                {!this.state.actors && !this.state.loading ? <h1>No Movie Found</h1> : null}
+                {!this.state.actors ? <h1>No Movie Found</h1> : null}
                 {this.state.loading ? <Spinner/> : null}
             </div>
         );

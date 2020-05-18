@@ -13,6 +13,7 @@ class SearchBar extends Component {
     timeout = null;
 
     doSearch = (e) => {
+        e.persist()
         this.setState({
             value: e.target.value
         })
@@ -31,7 +32,7 @@ class SearchBar extends Component {
                     <input 
                         type="text" 
                         className="rmdb-searchbar-input"
-                        placeholder="Search" 
+                        placeholder="Search"    
                         onChange={this.doSearch}
                         value={this.state.value}
                     />

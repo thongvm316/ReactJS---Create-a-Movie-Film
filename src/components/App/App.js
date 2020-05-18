@@ -10,7 +10,7 @@ const App = () => {
         <BrowserRouter>
                 <Header/>
                 <Switch>
-                    <Route path="/" component={Home} exact />
+                    <Route path="/" component={Home} exact /> {/* exact: khi url = / thi render page, khi /abc... nok render */}
                     <Route path="/:movieId" component={Movie} exact /> {/* /:movieId: lấy Id từ component MovieThumb, giống như cách lấy của NodeJs */}
                     <Route component={NotFound} />
                 </Switch>

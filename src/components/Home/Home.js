@@ -28,7 +28,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=2`;
+        const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
         // console.log(endPoint);
         this.fetchItems(endPoint);
     }
@@ -72,7 +72,7 @@ class Home extends Component {
                 console.log(result);
                 this.setState({
                     movies: [...this.state.movies, ...result.results],
-                    heroImage: this.state.heroImage || result.results[7], // Khi test, suy nghĩ them 
+                    heroImage: this.state.heroImage || result.results[0], // Khi test, suy nghĩ them 
                     loading: false,
                     currentPage: result.page,
                     totalPages: result.total_pages
@@ -101,7 +101,7 @@ class Home extends Component {
                 <div className="rmdb-home-grid">
                     <FourColGrid
                         header={this.state.searchTerm ? 'Search Result' : 'Popular Movies'}
-                        loading={this.state.loading}
+                        // loading={this.state.loading}
                     >
                         {this.state.movies.map((element, i) => {
                             // console.log({element, i});

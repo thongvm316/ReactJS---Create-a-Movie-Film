@@ -5,14 +5,12 @@ const FourColGrid = (props) => {
     // console.log(props);
     const renderElements = () => {
         const gridElements = props.children.map((element, i) => {
-            // console.log(element);
             return (
                 <div key={i} className="rmdb-grid-element">
                     {element}
                 </div>
             )
         });
-        // console.log(gridElements);
         return gridElements
     }
 
